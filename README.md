@@ -1,15 +1,13 @@
 # Semysms
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/semysms`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+GEM для работы с API semysms.ru
+Описание API - https://semysms.net/api.php
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'semysms'
+gem 'semysms', github: 'yuriineb/semysms'
 ```
 
 And then execute:
@@ -21,8 +19,84 @@ Or install it yourself as:
     $ gem install semysms
 
 ## Usage
+### Инициализация
+```ruby
+require "semysms"
+semysms = Semysms::Sms.new(token)
+```
+Параметры:
 
-TODO: Write usage instructions here
+token - секретный ключ доступа к API (обязательный параметр)
+
+### Метод для отправки одного СМС-сообщения одному адресату:
+```ruby
+semysms.send(device, phone, msg, { priority: priority, name: name, surname: surname })
+```
+
+Параметры:
+
+device - код устройства из списка подключенных ваших устройств (обязательный параметр)
+phone - телефон получателя в международном формате с кодом страны (обязательный параметр)
+msg - текст сообщения, до 1000 символов (обязательный параметр)
+priority - Приоритет на отправку, чем больше число, тем выше приоритет (целое число от 0 - 1000000)
+name - Имя контакта для создания номера в списке контактов
+surname - Фамилия контакта для создания номера в списке контактов
+
+
+### Метод для получения списка исходящих СМС-сообщений
+```ruby
+semysms.outbox_sms(device, { start_id: start_id, end_id: end_id, list_id: list_id, date_start: date_start, date_end: date_end })
+```
+
+Параметры:
+
+device - код устройства из списка подключенных ваших устройств (обязательный параметр)
+start_id - начальный код для фильтрации списка
+end_id - конечный код для фильтрации списка
+list_id - список кодов смс через запятую
+date_start - дата с которой начинать фильтрацию
+date_end - дата по которую фильтровать
+
+### Метод для получения списка входящих СМС-сообщений
+```ruby
+semysms.inbox_sms(device, { start_id: start_id, end_id: end_id })
+```
+
+Параметры:
+
+token - секретный ключ доступа к API (обязательный параметр)
+device - код устройства из списка подключенных ваших устройств (обязательный параметр)
+start_id - начальный код для фильтрации списка
+end_id - конечный код для фильтрации списка
+
+### Метод для получения списка устройств
+
+```ruby
+semysms.devices({ is_arhive:is_arhive, list_id:list_id  })
+```
+
+Параметры:
+is_arhive - фильтрация по типу архивный или нет
+list_id - список кодов устройств через запятую
+
+### Метод для отмены отправки, всех не отправленных на устройства СМС
+
+```ruby
+semysms.cancel_sms_from_device(device)
+```
+
+Параметры:
+device - код устройства из списка подключенных ваших устройств (обязательный параметр)
+
+### Метод для отмены отправки, сообщения на устройства СМС
+
+```ruby
+semysms.cancel_sms_from_sms(id_sms)
+```
+
+Параметры:
+id_sms - код смс из списка отправленных смс (обязательный параметр)
+
 
 ## Development
 
