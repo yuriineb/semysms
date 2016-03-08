@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Юрий Неб"]
   spec.email         = ["neb@region87.org"]
 
-  spec.summary       = %q{gem semysms}
-  spec.description   = %q{gem semysms}
+  spec.summary       = "gem semysms"
+  spec.description   = "gem semysms"
   spec.homepage      = "http://hotspot-online.ru"
   spec.license     = "MIT"
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
