@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["neb@region87.org"]
 
   spec.summary       = 'semysms'
-  spec.description   = 'gem semysms'
+  spec.description   = %q{gem semysms}
   spec.homepage      = "http://hotspot-online.ru"
   spec.license     = "MIT"
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
